@@ -13,18 +13,18 @@ const Success = (props: any) => {
   const [accessToken, setAccessToken] = useState<string | null>(
     params.get('access_token')
   )
-
-  const patientNumber: string | null = params.get('patient')
+  const [patient, setPatient] = useState<string | null>(params.get('patient'))
 
   const getAllergiesMaybe = async () => {
     const resp = await axios.get(
-      `/api/conditions/allergies?access_token=${accessToken}`
+      `/api/conditions/allergies?access_token=${accessToken}&patient=${patient}`
     )
+    console.log({ resp })
   }
 
   return (
     <div>
-      <h1>Patient : {patientNumber}</h1>
+      <h1>Patient : {patient}</h1>
       <button onClick={getAllergiesMaybe}>Get allergies?</button>
     </div>
   )
