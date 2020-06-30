@@ -14,7 +14,7 @@ namespace VetsApiTest.Controllers
     [ApiController]
     public class CallbackController : ControllerBase
     {
-        private static readonly HttpClient client = new HttpClient();
+        private HttpClient client = new HttpClient();
 
         public partial class AuthedResponse
         {
@@ -49,7 +49,7 @@ namespace VetsApiTest.Controllers
             // do a post. 
             var url = "https://sandbox-api.va.gov/oauth2/token";
 
-
+            client = new HttpClient();
             client.DefaultRequestHeaders.Add("Host", "sandbox-api.va.gov");
 
             // client.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
