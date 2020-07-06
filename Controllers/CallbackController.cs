@@ -44,8 +44,8 @@ namespace VetsApiTest.Controllers
             public long State { get; set; }
         }
 
-   readonly private string ClientId;
-   readonly private string Secret;
+        readonly private string ClientId;
+        readonly private string Secret;
 
         public CallbackController(IConfiguration config)
         {
