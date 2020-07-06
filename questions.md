@@ -16,20 +16,17 @@
   - 
 
 
-# Tech questions
-
-- I am doing the Authorization flow in a new app, and Its redirecting me to a url with `#` in the url instead of `?`. That is throwing an `state not found error`. Am a missing something? I can screen share what is happening if need be.
-
-- I am looking into the health API, they are calling for a `Integration Control Number (ICN)`. 
-    - What is that? 
-    - Where can a vet find their number?, vets don't know it, it should be  
-    - Do we have any test numbers?
-
-- `state` and `nonce` are just randomly generated code, correct? The value is "meaningless"
-
 
 lighthouse@va.gov 
  => email questions 
+
+Good Morning Dave! I wanted to touch base with you after our call last. I was able to get this sorted out on my end. Everything is going smoothly from a tech stand point. I do have a few more questions for you That I think can be answered via 
+
+ - Where is the data coming from? Specicially this API: https://developer.va.gov/explore/health/docs/fhir?version=current . Is it Vista data? I know that you said it was many sources, but the team wants to know where it is coming from.
+ - Is this used in the existing va.gov site or ecosystem?
+ - I see there are ton of "get information" endpoints, but Is there a way to correct the data if it comes back wrong?
+
+Let me know and thanks again! 
 
  
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace VetsApiTest.Controllers
@@ -37,23 +38,35 @@ namespace VetsApiTest.Controllers
             public long ExpiresIn { get; set; }
 
             [JsonProperty("patient")]
-            public long Patient { get; set; }
+            public string Patient { get; set; }
 
             [JsonProperty("state")]
             public long State { get; set; }
         }
 
+   readonly private string ClientId;
+   readonly private string Secret;
+
+        public CallbackController(IConfiguration config)
+        {
+            this.ClientId = config["CLIENT_ID"];
+            this.Secret = config["SECRET"];
+        }
+
         [HttpGet]
         public async Task<ActionResult> Index(string id_token, string code, string state)
         {
+            var clientId = this.ClientId;
+            var secret = this.Secret;
+
+
             // do a post. 
             var url = "https://sandbox-api.va.gov/oauth2/token";
 
             client = new HttpClient();
             client.DefaultRequestHeaders.Add("Host", "sandbox-api.va.gov");
 
-            // client.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes("0oa7iad5rpW3R4iNY2p7:40K0Czd3ZCYNqydDG0JPm91BMTCqAwty9JmpXQt7");
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes($"{clientId}:{secret}");
             client.DefaultRequestHeaders.Add("Authorization", $"Basic {System.Convert.ToBase64String(plainTextBytes)}");
 
 
