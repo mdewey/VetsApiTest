@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import Allergies from '../components/Allergies'
+import RawView from '../components/RawView'
 const Success = (props: any) => {
   console.log({ props })
 
@@ -120,7 +121,12 @@ const Success = (props: any) => {
       <h2>Conditions</h2>
       <ul>
         {conditions.map((al: any) => {
-          return <li key={al.resource.id}>{al.resource?.code?.text}</li>
+          return (
+            <li key={al.resource.id}>
+              {al.resource?.code?.text} | {al.resource?.dateRecorded}
+              <RawView json={al.resource} />
+            </li>
+          )
         })}
       </ul>
       <h2>diagnostics</h2>
