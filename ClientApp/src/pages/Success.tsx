@@ -94,6 +94,12 @@ const Success = (props: any) => {
     console.log({ resp })
   }
 
+  const getMoreData = async (resourceId: string, resource: string) => {
+    const resp = await axios.get(
+      `/api/resource/${resource}?access_token=${accessToken}&resourceId=${resourceId}`
+    )
+    console.log({ resp })
+  }
   useEffect(() => {
     ;(async () => {
       await getAllergies()
@@ -140,6 +146,7 @@ const Success = (props: any) => {
                   return <li>{result.display}</li>
                 })}
               </ul>
+              <RawView json={al.resource} />
             </li>
           )
         })}
@@ -147,7 +154,11 @@ const Success = (props: any) => {
       <h2>Immunizations</h2>
       <ul>
         {immunization.map((al: any) => {
-          return <li key={al.resource.id}>{al.resource.vaccineCode.text}</li>
+          return (
+            <li key={al.resource.id}>
+              {al.resource.vaccineCode.text} <RawView json={al.resource} />
+            </li>
+          )
         })}
       </ul>
       <h2>Medications</h2>
@@ -156,6 +167,17 @@ const Success = (props: any) => {
           return (
             <li key={al.resource.id}>
               {al.resource.medicationReference.display}
+              <button
+                onClick={() =>
+                  getMoreData(
+                    al.resource.medicationReference.reference.split('/').pop(),
+                    'Medication'
+                  )
+                }
+              >
+                go go gadget
+              </button>
+              <RawView json={al.resource} />
             </li>
           )
         })}
@@ -166,6 +188,17 @@ const Success = (props: any) => {
           return (
             <li key={al.resource.id}>
               {al.resource.medicationReference.display}
+              <button
+                onClick={() =>
+                  getMoreData(
+                    al.resource.medicationReference.reference.split('/').pop(),
+                    'Medication'
+                  )
+                }
+              >
+                go go gadget
+              </button>
+              <RawView json={al.resource} />
             </li>
           )
         })}
@@ -181,6 +214,7 @@ const Success = (props: any) => {
                   return <li key={index}>{code.display}</li>
                 })}
               </ul>
+              <RawView json={al.resource} />
             </li>
           )
         })}
@@ -197,6 +231,7 @@ const Success = (props: any) => {
                   return <li key={index}>{code.display}</li>
                 })}
               </ul>
+              <RawView json={al.resource} />
             </li>
           )
         })}

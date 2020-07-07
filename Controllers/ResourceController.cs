@@ -17,15 +17,15 @@ namespace VetsApiTest.Controllers
         private static readonly HttpClient client = new HttpClient();
 
 
-        [HttpGet("allergies")]
-        public async Task<ActionResult> GetAllergies([FromQuery] string access_token, [FromQuery] string resourceId)
+        [HttpGet("{resource}")]
+        public async Task<ActionResult> GetAllergies([FromRoute] string resource, [FromQuery] string access_token, [FromQuery] string resourceId)
         {
-            return await ProxyCall("AllergyIntolerance", access_token, resourceId);
-
+            return await ProxyCall(resource, access_token, resourceId);
         }
 
          private async Task<ContentResult> ProxyCall(string endpoint, string access_token, string resourceId){
             string url = $"https://sandbox-api.va.gov/services/fhir/v0/dstu2/{endpoint}/{resourceId}";
+            Console.WriteLine(url);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
 
 
